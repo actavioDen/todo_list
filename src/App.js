@@ -1,4 +1,4 @@
-import TodoList from "./View/TodoList";
+import TodoList from "./View/TodoList/TodoList";
 
 function App() {
   return (
