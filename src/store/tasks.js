@@ -14,9 +14,21 @@ class tasks{
             id: nextId(),                // Как уникализировать ИД?
             title: title,
             description: description,
-            ready: false
+            сompleted: false
         })
     };
+
+    changeCompleted(id){
+        let el= this.getByID(id);
+        el.сompleted ? el.сompleted=false : el.сompleted = true;
+        
+    }
+
+    getByID(id){
+       return this.tasks.find(el=>{
+            return el.id==id;
+        })
+    }
 }
 
 export default new tasks();
