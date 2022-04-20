@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import {List, ListItem, ListItemText, Checkbox, Typography, Grid, TextField, Button, Box } from '@mui/material';
+import {Divider, Paper, Typography, Grid, TextField, Button, Box, IconButton} from '@mui/material';
 import store from "../../store/tasks";
 import ModalAddTask from "../ModalAddTask/ModalAddTask";
-import AddTaskIcon from '@mui/icons-material/AddTask';
+import AddTaskIcon from '@mui/icons-material/AddCircle';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 
 function TodoList(){
@@ -19,6 +20,11 @@ function TodoList(){
         setSearchTask(e.target.value);
     };
 
+    function removeTask(id){
+        store.removeTasks(id);
+        console.log("Сработал remove");
+    }
+
     if(searchTask!=""){ // Фильтрация зачад по поисковой строке.
         filterTasks = store.tasks.filter((el)=>{
             let regexp = new RegExp(`${searchTask}`, 'ui');
@@ -31,33 +37,38 @@ function TodoList(){
     };
 
     if(filterTasks.length){
-        jsx= <Box sx={{display:"flex", justifyContent:"center"}}>
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {filterTasks.map((el)=>{
+        jsx= <Box sx={{display:"flex", justifyContent:"center", flexWrap: "wrap"}}>
+            {filterTasks.map((el)=>{
                         return(
-                            <ListItem key={el.id}>
-                                <Checkbox checked={el.сompleted} onChange={()=>store.changeCompleted(el.id)}/>
-                            
-                                <ListItemText
-                                    primary={el.title}
-                                    secondary={
-                                        <>                                    
-                                        {el.description}    
-                                        </>
-                                    }
-                                    />
-                            </ListItem>
+                            <Paper elevation={3} sx={{padding: 3, margin: 2, display: "flex", flexDirection: "column"}}>
+                                    <Typography component="p" variant="h6">
+                                        {el.title}
+                                    </Typography>
+                                         <Divider/>                                 
+                                    <Typography>
+                                        {el.description}
+                                    </Typography> 
+
+                                    <IconButton 
+                                        variant="outlined" 
+                                        onClick={()=>removeTask(el.id)}
+                                        sx={{color: "#B22222", marginLeft: "5px", alignSelf:"flex-end"}}
+                                >
+                                    <DeleteOutlineIcon/>
+                                </IconButton> 
+                            </Paper>
                         )
                     })}
-                </List>
+            
             </Box>;
     } else {
         jsx= <Typography mt={5}>Задачи не найдены</Typography>
     };    
 
+   
     return(
         <>
-            <Grid container spacing={1} sx={{maxWidth: 800, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>
+            <Grid container spacing={1} sx={{marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>
                 
                 <Grid item xs={12}>
                     <Typography variant="h4" component="h1" gutterBottom sx={{textAlign: "center"}}>
@@ -68,7 +79,7 @@ function TodoList(){
                     <Button 
                         variant="contained" 
                         startIcon={<AddTaskIcon />}
-                        onClick={modalHandleOpen}
+                        onClick={modalHandleOpen}                        
                     >
                         Новая задача
                     </Button>
