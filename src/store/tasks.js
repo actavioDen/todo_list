@@ -18,6 +18,16 @@ class tasks{
         })
     };
 
+    removeTasks(id){    //Удалить задачу
+        let indexRemove;
+        tasks.map((el, index)=> { //Определить индекс элемента в массиве
+            if(el.id==id) {
+                indexRemove= index;
+            };
+        tasks.splice(indexRemove, 1);
+        });
+    }
+
 
     changeCompleted(id){
         let el= this.getByID(id);

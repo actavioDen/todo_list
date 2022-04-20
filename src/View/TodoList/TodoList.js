@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import {List, ListItem, ListItemText, Checkbox, Typography, Grid, TextField, Button } from '@mui/material';
+import {List, ListItem, ListItemText, Checkbox, Typography, Grid, TextField, Button, Box } from '@mui/material';
 import store from "../../store/tasks";
 import ModalAddTask from "../ModalAddTask/ModalAddTask";
 import AddTaskIcon from '@mui/icons-material/AddTask';
@@ -31,23 +31,26 @@ function TodoList(){
     };
 
     if(filterTasks.length){
-        jsx= <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {filterTasks.map((el)=>{
-                    return(
-                        <ListItem key={el.id}>
-                            <Checkbox checked={el.сompleted} onChange={()=>store.changeCompleted(el.id)}/>
-                            <ListItemText
-                                primary={el.title}
-                                secondary={
-                                    <>                                    
-                                    {el.description}    
-                                    </>
-                                }
-                                />
-                        </ListItem>
-                    )
-                })}
-            </List>;
+        jsx= <Box sx={{display:"flex", justifyContent:"center"}}>
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {filterTasks.map((el)=>{
+                        return(
+                            <ListItem key={el.id}>
+                                <Checkbox checked={el.сompleted} onChange={()=>store.changeCompleted(el.id)}/>
+                            
+                                <ListItemText
+                                    primary={el.title}
+                                    secondary={
+                                        <>                                    
+                                        {el.description}    
+                                        </>
+                                    }
+                                    />
+                            </ListItem>
+                        )
+                    })}
+                </List>
+            </Box>;
     } else {
         jsx= <Typography mt={5}>Задачи не найдены</Typography>
     };    
