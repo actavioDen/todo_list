@@ -5,7 +5,7 @@ import storage from "../../store/tasks";
 
 
 
-function AddTaskWindow(){
+function AddTaskWindow({modalHandleClose}){
     let [title, setTitle] = useState("");
     let [description, setDescription] = useState("");
 
@@ -20,19 +20,20 @@ function AddTaskWindow(){
     function addTask(){
         if(title!="" && description!=""){
             storage.addTasks(title, description);
+            modalHandleClose();
         };
         
     }
 
     return(
         <Grid container spacing={1}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{textAlign: "center"}}>
                 <Typography variant="h5" component="h2" gutterBottom>
-                    Добавить новую
+                    Новая задача
                 </Typography>
             </Grid> 
             <Grid item xs={12}>
-                <TextField id="outlined-basic" label="Заголовок" variant="outlined" onChange={(e)=>onChangeTitle(e)}/>
+                <TextField id="outlined-basic" label="Заголовок" variant="outlined" onChange={(e)=>onChangeTitle(e)} sx={{width: 300}}/>
             </Grid> 
             <Grid item xs={12}>
                 <TextField
@@ -41,15 +42,16 @@ function AddTaskWindow(){
                     multiline
                     rows={4}
                     onChange={(e)=>onChangeDesc(e)}
+                    sx={{width: 300}}
                 />
             </Grid> 
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{textAlign: "center"}}>
                 <Button 
                     variant="contained" 
                     startIcon={<AddTaskIcon />}
-                    onClick={addTask}    
+                    onClick={addTask}
                 >
-                    Создать
+                    Добавить
                 </Button>
             </Grid>                         
         </Grid>

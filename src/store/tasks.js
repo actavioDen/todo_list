@@ -18,6 +18,7 @@ class tasks{
         })
     };
 
+
     changeCompleted(id){
         let el= this.getByID(id);
         el.сompleted ? el.сompleted=false : el.сompleted = true;
@@ -25,7 +26,7 @@ class tasks{
     }
 
     getByID(id){
-       return this.tasks.find(el=>{
+        return this.tasks.find(el=>{
             return el.id==id;
         })
     }
