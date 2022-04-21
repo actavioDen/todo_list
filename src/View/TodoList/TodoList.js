@@ -79,7 +79,7 @@ function TodoList(){
                     </Button>
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="Поиск по задачам" size="small" variant="standard" onChange={(e)=>changeSearchTask(e)}/>
+                    <TextField id="outlined-basic" label="Найти задачу" size="small" variant="standard" onChange={(e)=>changeSearchTask(e)}/>
                     
                 </Grid>
                 <Grid item xs={12}>
