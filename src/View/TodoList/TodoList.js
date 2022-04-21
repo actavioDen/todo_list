@@ -5,6 +5,7 @@ import store from "../../store/tasks";
 import ModalAddTask from "../ModalAddTask/ModalAddTask";
 import AddTaskIcon from '@mui/icons-material/AddCircle';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
 import styles from "./style.css";
 
 
@@ -36,7 +37,7 @@ function TodoList(){
         jsx= <Box className={styles.tastBox}>
                 {filterTasks.map((el)=>{
                     return(
-                        <Paper elevation={3} key={el.id} className={styles.paper}>
+                        <Paper elevation={3} key={el.id} className={styles.paper} sx={{background: "#FDFDC1"}}>
                                 <Typography component="p" variant="h6">
                                     {el.title}
                                 </Typography>
@@ -45,13 +46,20 @@ function TodoList(){
                                     {el.description}
                                 </Typography> 
 
+                                <div className={styles.paperButtonsPanel}>
                                 <IconButton 
-                                    variant="outlined" 
-                                    onClick={()=>store.removeTasks(el.id)}
-                                    className={styles.buttonRemove}
-                            >
-                                <DeleteOutlineIcon className={styles.buttonRemove}/>
-                            </IconButton> 
+                                        variant="outlined"
+                                    >
+                                        <EditIcon className={styles.buttonEdit}/>
+                                    </IconButton> 
+
+                                    <IconButton 
+                                        variant="outlined" 
+                                        onClick={()=>store.removeTasks(el.id)}
+                                    >
+                                        <DeleteOutlineIcon className={styles.buttonRemove}/>
+                                    </IconButton>    
+                                </div>
                         </Paper>
                     )
                 })}            

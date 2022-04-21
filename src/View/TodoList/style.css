@@ -17,7 +17,15 @@
     flex-wrap: wrap;
 }
 
+.paperButtonsPanel{
+    width: max-content;
+    align-self: flex-end;
+}
+
 .buttonRemove{
     color: #B22222;
-    align-self: flex-end;
+}
+
+.buttonEdit{
+    color:#b47674;
 }
