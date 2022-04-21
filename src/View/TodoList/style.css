@@ -1,0 +1,23 @@
+.gridContainer{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.paper{
+    padding: 10px;
+    margin: 10px;
+    
+    display: flex;
+    flex-direction: column;
+}
+.tastBox{
+    
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.buttonRemove{
+    color: #B22222;
+    align-self: flex-end;
+}

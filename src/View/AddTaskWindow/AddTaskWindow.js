@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {Button, Grid, TextField, Typography} from '@mui/material';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import storage from "../../store/tasks";
+import styles from "./style.css"
 
 
 
@@ -27,13 +28,13 @@ function AddTaskWindow({modalHandleClose}){
 
     return(
         <Grid container spacing={1}>
-            <Grid item xs={12} sx={{textAlign: "center"}}>
+            <Grid item xs={12} className={styles.container}>
                 <Typography variant="h5" component="h2" gutterBottom>
                     Новая задача
                 </Typography>
             </Grid> 
             <Grid item xs={12}>
-                <TextField id="outlined-basic" label="Заголовок" variant="outlined" onChange={(e)=>onChangeTitle(e)} sx={{width: 300}}/>
+                <TextField id="outlined-basic" label="Заголовок" variant="outlined" onChange={(e)=>onChangeTitle(e)} className={styles.inputTitle}/>
             </Grid> 
             <Grid item xs={12}>
                 <TextField
@@ -42,10 +43,10 @@ function AddTaskWindow({modalHandleClose}){
                     multiline
                     rows={4}
                     onChange={(e)=>onChangeDesc(e)}
-                    sx={{width: 300}}
+                    className={styles.inputDesk}
                 />
             </Grid> 
-            <Grid item xs={12} sx={{textAlign: "center"}}>
+            <Grid item xs={12} className={styles.gridButton}>
                 <Button 
                     variant="contained" 
                     startIcon={<AddTaskIcon />}
