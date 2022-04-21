@@ -66,7 +66,7 @@ function TodoList(){
                 
                 <Grid item xs={12}>
                     <Typography variant="h4" component="h1" gutterBottom >
-                        Task Manager
+                        Task Desk
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
