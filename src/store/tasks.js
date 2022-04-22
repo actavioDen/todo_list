@@ -47,19 +47,17 @@ class tasks{
         });
     };
 
-
-    changeCompleted(id){
-        let el= this.getByID(id);
-        el.сompleted ? el.сompleted=false : el.сompleted = true;
-        console.log(el.id);
-        
-    };
-
     getByID(id){
         return this.tasks.find(el=>{
             return el.id==id;
         })
     };
+
+    editTask(id, newTitle, newDescription){
+        let el = this.getByID(id);
+        el.title= newTitle;
+        el.description = newDescription;
+    }
 }
 
 export default new tasks();

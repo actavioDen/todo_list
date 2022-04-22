@@ -3,29 +3,9 @@
     text-align: center;
 }
 
-.paper{
-    padding: 10px;
-    margin: 10px;
-    
-    display: flex;
-    flex-direction: column;
-}
 .tastBox{
     
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-}
-
-.paperButtonsPanel{
-    width: max-content;
-    align-self: flex-end;
-}
-
-.buttonRemove{
-    color: #B22222;
-}
-
-.buttonEdit{
-    color:#b47674;
 }

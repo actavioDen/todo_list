@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import {Divider, Paper, Typography, Grid, TextField, Button, Box, IconButton} from '@mui/material';
+import { Typography, Grid, TextField, Button, Box} from '@mui/material';
 import store from "../../store/tasks";
 import ModalAddTask from "../ModalAddTask/ModalAddTask";
 import AddTaskIcon from '@mui/icons-material/AddCircle';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/Edit';
+import TaskPaper from "../TaskPaper/TaskPaper";
+
 import styles from "./style.css";
 
 
@@ -14,9 +14,7 @@ function TodoList(){
     let [searchTask, setSearchTask] =useState(""); //Строка поиска
     let filterTasks; //Массив отфильтрованных задач
 
-    const [modalOpen, setModalOpen] = React.useState(false); //Модальное окно
-    const modalHandleOpen = () => setModalOpen(true);
-    const modalHandleClose = () => setModalOpen(false);
+    const [modalAddOpen, setModalAddOpen] = React.useState(false); //Модальное окно добавления задачи
 
     function changeSearchTask(e){   //Отслеживание изменений в поисковой строке. 
         setSearchTask(e.target.value);
@@ -35,32 +33,9 @@ function TodoList(){
 
     if(filterTasks.length){
         jsx= <Box className={styles.tastBox}>
-                {filterTasks.map((el)=>{
+                {filterTasks.map((el)=>{                    
                     return(
-                        <Paper elevation={3} key={el.id} className={styles.paper} sx={{background: "#FDFDC1"}}>
-                                <Typography component="p" variant="h6">
-                                    {el.title}
-                                </Typography>
-                                    <Divider/>                                 
-                                <Typography>
-                                    {el.description}
-                                </Typography> 
-
-                                <div className={styles.paperButtonsPanel}>
-                                <IconButton 
-                                        variant="outlined"
-                                    >
-                                        <EditIcon className={styles.buttonEdit}/>
-                                    </IconButton> 
-
-                                    <IconButton 
-                                        variant="outlined" 
-                                        onClick={()=>store.removeTasks(el.id)}
-                                    >
-                                        <DeleteOutlineIcon className={styles.buttonRemove}/>
-                                    </IconButton>    
-                                </div>
-                        </Paper>
+                        <TaskPaper id={el.id} title={el.title} description={el.description} key={el.id}/>
                     )
                 })}            
             </Box>;
@@ -81,7 +56,7 @@ function TodoList(){
                     <Button 
                         variant="contained" 
                         startIcon={<AddTaskIcon />}
-                        onClick={modalHandleOpen}                        
+                        onClick={() => setModalAddOpen(true)}                        
                     >
                         Новая задача
                     </Button>
@@ -95,7 +70,7 @@ function TodoList(){
                 </Grid>                   
             </Grid>
 
-            <ModalAddTask modalOpen={modalOpen} modalHandleClose={modalHandleClose}/>
+            <ModalAddTask modalOpen={modalAddOpen} modalHandleClose={() => setModalAddOpen(false)}/>
         </>
     );
 }
