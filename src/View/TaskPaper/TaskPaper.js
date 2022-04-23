@@ -1,5 +1,5 @@
 import React from 'react';
-import {Divider, Paper, IconButton, Typography} from  '@mui/material';
+import {Divider, Paper, IconButton, Typography, TextField} from  '@mui/material';
 import store from "../../store/tasks";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
@@ -8,13 +8,16 @@ import styles from "./style.css";
 function TaskPaper({id, title, description, setModalEditOpen }){
     return(
             <Paper elevation={3} key={id} className={styles.paper} sx={{background: "#FDFDC1"}}>
-                <Typography component="p" variant="h6">
+                <TextField defaultValue={title} multiline />
+                <TextField defaultValue={description} multiline/>
+
+                {/* <Typography component="p" variant="h6">
                     {title}
                 </Typography>
                     <Divider/>                                 
                 <Typography>
                     {description}
-                </Typography> 
+                </Typography>  */}
 
                 <div className={styles.paperButtonsPanel}>
                 <IconButton 
