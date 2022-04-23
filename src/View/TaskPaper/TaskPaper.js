@@ -1,35 +1,30 @@
 import React from 'react';
-import {Divider, Paper, IconButton, Typography, TextField} from  '@mui/material';
-import store from "../../store/tasks";
+import {Paper, IconButton, TextField} from  '@mui/material';
+import storage from "../../store/tasks";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import styles from "./style.css";
 
-function TaskPaper({id, title, description, setModalEditOpen }){
+function editTask(id, e){
+    storage.editTask(id, e.target.value);
+}
+
+function TaskPaper({id, description }){
     return(
             <Paper elevation={3} key={id} className={styles.paper} sx={{background: "#FDFDC1"}}>
-                <TextField defaultValue={title} multiline />
-                <TextField defaultValue={description} multiline/>
-
-                {/* <Typography component="p" variant="h6">
-                    {title}
-                </Typography>
-                    <Divider/>                                 
-                <Typography>
-                    {description}
-                </Typography>  */}
+                <TextField 
+                defaultValue={description} 
+                multiline rows={5} 
+                variant="standard" 
+                onChange={(e)=>editTask(id, e)}
+                placeholder="Новая задача"
+                />
 
                 <div className={styles.paperButtonsPanel}>
-                <IconButton 
-                        variant="outlined"
-                        onClick={setModalEditOpen}
-                    >
-                        <EditIcon className={styles.buttonEdit}/>
-                    </IconButton> 
 
                     <IconButton 
                         variant="outlined" 
-                        onClick={()=>store.removeTasks(id)}
+                        onClick={()=>storage.removeTasks(id)}
                     >
                         <DeleteOutlineIcon className={styles.buttonRemove}/>
                     </IconButton>    

@@ -8,32 +8,27 @@ class tasks{
     }
 
     tasks=[{
-                id: 101,                // Как уникализировать ИД?
-                title: "Купить молоко",
+                id: 101,                
                 description: 'Магазин "Продукты 24", 2.5%'
             },
             {
-                id: 102,                // Как уникализировать ИД?
-                title: "Позвонить друзьям",
+                id: 102,                
                 description: 'В пятницу вечером'
             },
             {
-                id: 103,                // Как уникализировать ИД?
-                title: "Забрать посылку",
+                id: 103,                
                 description: 'Отделение СДЭК на Консомольской 24. При себе иметь паспорт'
             },
             {
-                id: 104,                // Как уникализировать ИД?
-                title: "Проверить почту",
+                id: 104,                
                 description: 'Жду ответ о клиента с решением о покупке ПК'
             }
             
         ];
 
-    addTasks(title, description){ // Добавление новой задачи
+    addTask(description){ // Добавление новой задачи
         this.tasks.push({
-            id: nextId(),                // Как уникализировать ИД?
-            title: title,
+            id: nextId(),                
             description: description
         })
     };
@@ -53,10 +48,12 @@ class tasks{
         })
     };
 
-    editTask(id, newTitle, newDescription){
-        let el = this.getByID(id);
-        el.title= newTitle;
-        el.description = newDescription;
+    editTask(id, newDescription){
+        if(newDescription!=""){
+            let el = this.getByID(id);
+            el.description = newDescription; 
+        };
+        
     }
 }
 

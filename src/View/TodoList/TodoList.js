@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Typography, Grid, TextField, Button, Box} from '@mui/material';
-import store from "../../store/tasks";
-import ModalAddTask from "../ModalAddTask/ModalAddTask";
+import storage from "../../store/tasks";
 import AddTaskIcon from '@mui/icons-material/AddCircle';
 import TaskPaper from "../TaskPaper/TaskPaper";
 
@@ -14,21 +13,23 @@ function TodoList(){
     let [searchTask, setSearchTask] =useState(""); //Строка поиска
     let filterTasks; //Массив отфильтрованных задач
 
-    const [modalAddOpen, setModalAddOpen] = React.useState(false); //Модальное окно добавления задачи
+    function addTaskBlank(){
+        storage.addTask("");
+    }
 
     function changeSearchTask(e){   //Отслеживание изменений в поисковой строке. 
         setSearchTask(e.target.value);
     };
 
     if(searchTask!=""){ // Фильтрация зачад по поисковой строке.
-        filterTasks = store.tasks.filter((el)=>{
+        filterTasks = storage.tasks.filter((el)=>{
             let regexp = new RegExp(`${searchTask}`, 'ui');
             let resTitle = regexp.test(el.title);
             let resDesk = regexp.test(el.description);
             if(resTitle || resDesk) return el;
         })
     } else{
-        filterTasks = store.tasks; // Если поисковая строка пустая- отобразить все задачи
+        filterTasks = storage.tasks; // Если поисковая строка пустая- отобразить все задачи
     };
 
     if(filterTasks.length){
@@ -56,7 +57,7 @@ function TodoList(){
                     <Button 
                         variant="contained" 
                         startIcon={<AddTaskIcon />}
-                        onClick={() => setModalAddOpen(true)}                        
+                        onClick={addTaskBlank}                        
                     >
                         Новая задача
                     </Button>
@@ -70,7 +71,6 @@ function TodoList(){
                 </Grid>                   
             </Grid>
 
-            <ModalAddTask modalOpen={modalAddOpen} modalHandleClose={() => setModalAddOpen(false)}/>
         </>
     );
 }
